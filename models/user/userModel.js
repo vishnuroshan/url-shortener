@@ -21,13 +21,6 @@ const UserSchema = new Schema({
 		set: (pass) => bcrypt.hashSync(pass, 10),
 		get: () => '*********',
 	},
-	displayname: {
-		type: String,
-		set: (val) => val.trim()
-	},
-	aboutme: {
-		type: String,
-	},
 	status: {
 		type: String,
 		enum: ['active', 'away', 'offline'],

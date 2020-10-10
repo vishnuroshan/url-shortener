@@ -8,8 +8,8 @@ const server = http.createServer();
 server.listen(port, () => {
 	console.log(
 		chalk.bgBlue.black(
-			`Server running on:> ${server.address().address ? server.address().address : 'localhost'
-			}:${server.address().port}`
+			`Server running on:> ${server.address().address ? server.address().address : 'localhost:'
+			}${server.address().port}`
 		)
 	);
 });
@@ -18,7 +18,7 @@ server.on('request', app);
 
 //? banner
 // const figlet = require('figlet');
-// figlet.text('node-app', {
+// figlet.text('URL-shortener', {
 // // 	more fonts visit http://www.figlet.org/fontdb.cgi
 // 	font: 'isometric3',
 // 	width: 80,
