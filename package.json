@@ -1,7 +1,7 @@
 {
-  "name": "node-app",
+  "name": "url-shrotener",
   "version": "0.1.0",
-  "description": "node app",
+  "description": "url-shortener",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vishnuroshan/node-mongoose-app.git"
+    "url": "git+https://github.com/vishnuroshan/url-shortener.git"
   },
   "keywords": [
     "basic",
@@ -20,9 +20,9 @@
   "author": "vishnu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vishnuroshan/node-mongoose-app/issues"
+    "url": "https://github.com/vishnuroshan/url-shortener/issues"
   },
-  "homepage": "https://github.com/vishnuroshan/node-mongoose-app#readme",
+  "homepage": "https://github.com/vishnuroshan/url-shortener#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "celebrate": "^12.2.0",
