@@ -28,10 +28,19 @@ urlController.createUrl = async (newUrl) => {
 	}
 };
 
-urlController.getUrlsForUser = async (email) => {
+urlController.getUrlsForUser = async ({ userId }, offset = 0, limit = 30) => {
 	try {
-		let urls = await Url.getUrlsForUser(email);
-		return urls;
+		let count = await Url.getUrlCount({ userId });
+		console.log('count:::>> ', count);
+
+		let urls = await Url.getUrlsForUser(userId, offset, limit);
+		return {
+			count,
+			totalPages: Math.ceil(count / limit),
+			resultPerPage: limit,
+			skip: offset,
+			data: urls
+		};
 	} catch (err) {
 		console.log(err);
 	}

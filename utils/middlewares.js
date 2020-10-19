@@ -6,8 +6,8 @@ exports.checkToken = (request, response, next) => {
 	if (token) {
 		if (token.startsWith('Bearer ')) token = token.slice(7, token.length);
 		const { payload, err } = jwt.validateJWT(token);
-		if (err) {
-			User.findUser(payload.email).then((user) => {
+		if (payload) {
+			User.getUser(payload.email).then((user) => {
 				request.user = user;
 				next();
 			});
@@ -16,7 +16,8 @@ exports.checkToken = (request, response, next) => {
 			return response.status(401).json({ status: 401, ...err });
 		}
 	} else {
-		// token not sent
-		return response.status(401).json({ status: 401, message: 'unAuthorized' });
+		if (request.url === '/shorten') return next();
+		// else token not sent 
+		else return response.status(401).json({ status: 401, message: 'unAuthorized' });
 	}
 };

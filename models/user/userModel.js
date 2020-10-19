@@ -23,8 +23,8 @@ const UserSchema = new Schema({
 	},
 	status: {
 		type: String,
-		enum: ['active', 'away', 'offline'],
-		default: 'offline',
+		enum: ['active', 'inactive'],
+		default: 'active',
 	},
 }, { toJSON: { getters: true } });
 

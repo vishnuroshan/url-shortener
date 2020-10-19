@@ -15,7 +15,7 @@ const UrlSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	analtyics: {
+	analytics: {
 		type: Array,
 		default: []
 	},

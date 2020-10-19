@@ -9,7 +9,7 @@ router.post('/create-account', celebrate({
 		email: Joi.string().email().required(),
 		// password rules
 		password: Joi.string().required()
-			.pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/, { name: 'passwordRule' })
+		// .pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/, { name: 'passwordRule' })
 	})
 }), errors(), (request, response) => {
 	authController.createUser(request.body).then(result => {
