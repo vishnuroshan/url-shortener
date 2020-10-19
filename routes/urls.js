@@ -43,7 +43,7 @@ router.post('/shorten', limiter, checkToken, celebrate({
 	urlController.createUrl(request.body).then(urlObj => {
 		let shortUrl = `${BASE_URL}/${urlObj.key}`;
 		if (!shortUrl.startsWith('http://', 0)) shortUrl = `http://${shortUrl}`;
-		response.status(200).json({ urlObj, shortUrl, ipInfo: request.ipInfo });
+		response.status(200).json({ shortUrl });
 
 	}, err => {
 		console.log(err);
