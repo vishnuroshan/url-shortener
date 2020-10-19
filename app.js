@@ -9,6 +9,10 @@ const routes = require('./routes');
 const path = require('path');
 const expressip = require('express-ip');
 const checkToken = require('./utils/middlewares').checkToken;
+
+const helmet = require('helmet');
+app.use(helmet());
+
 app.use(expressip().getIpInfoMiddleware);
 
 app.disable('x-powered-by');

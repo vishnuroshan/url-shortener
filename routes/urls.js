@@ -18,7 +18,6 @@ router.get('/:id', (request, response) => {
 			response.status(301).redirect(urlObject.url);
 			// only add analytics when urlObject has user
 			if (urlObject.userId) {
-				console.log('user id ::>> ', urlObject.userId);
 				urlController.addAnalytics(request.params.id, { ipInfo: request.ipInfo, when: new Date().toISOString() }).then((res) => {
 					console.log('update? ', res.nModified);
 				});
@@ -43,8 +42,7 @@ router.post('/shorten', limiter, checkToken, celebrate({
 	urlController.createUrl(request.body).then(urlObj => {
 		let shortUrl = `${BASE_URL}/${urlObj.key}`;
 		if (!shortUrl.startsWith('http://', 0)) shortUrl = `http://${shortUrl}`;
-		response.status(200).json({ shortUrl });
-
+		response.status(200).json({ shortUrl, isAuth: request.user ? true : false });
 	}, err => {
 		console.log(err);
 		response.status(err.status).json(err);
