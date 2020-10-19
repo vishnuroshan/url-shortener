@@ -17,6 +17,13 @@ router.get('/:id', (request, response) => {
 		if (urlObject && urlObject.url) {
 			response.status(301).redirect(urlObject.url);
 			console.log('message after redirect', request.ipInfo);
+			if (!request.ipInfo.error) {
+				urlController.addAnalytics(request.params.id, { ipInfo: request.ipInfo }).then((res) => {
+					console.log(res);
+					console.log('\n\n\n ip info added to ', request.params.id);
+				});
+			}
+
 		}
 		else response.status(404).sendFile(path.join(path.parse(__dirname).dir + '/public/templates/index.html'));
 	}, err => {

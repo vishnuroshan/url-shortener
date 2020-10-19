@@ -15,7 +15,10 @@ const UrlSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	analtyics: [],
+	analtyics: {
+		type: Array,
+		default: []
+	},
 	userId: {
 		type: Schema.Types.ObjectId,
 		ref: 'user'
