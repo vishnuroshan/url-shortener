@@ -15,11 +15,20 @@ const UrlSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	analtyics: [],
+	userId: {
+		type: Schema.Types.ObjectId,
+		ref: 'user'
+	},
 	status: {
 		type: String,
 		enum: ['active', 'inactive', 'removed'],
-		default: 'active',
+		default: 'active'
 	},
+	expiresIn: {
+		default: 0,
+		type: Number
+	}
 }, { timestamps: true });
 
 const Url = mongoose.model('url', UrlSchema);

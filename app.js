@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes');
 const path = require('path');
+const expressip = require('express-ip');
+app.use(expressip().getIpInfoMiddleware);
 
 app.disable('x-powered-by');
 app.use('/', express.static(path.join(__dirname, 'public')));
