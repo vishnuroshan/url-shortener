@@ -10,7 +10,9 @@ const limiter = rateLimit({
 	max: 100 // limit each IP to 50 requests per windowMs
 });
 const path = require('path');
-
+router.get('/', (request, response) => {
+	response.status(200).send('hi welcome to linkBro. A simple url shortener service');
+});
 // redirect
 router.get('/:id', (request, response) => {
 	urlController.getUrlFromKey(request.params.id).then((urlObject) => {
