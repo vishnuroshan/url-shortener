@@ -13,11 +13,10 @@ router.post('/create-account', celebrate({
 	})
 }), errors(), (request, response) => {
 	authController.createUser(request.body).then(result => {
-		console.log(result);
-		response.status(result.status).json(result);
+		response.status(200).json(result);
 	}, err => {
 		console.log(err);
-		response.status(err.status).json(err);
+		response.status(500).json(err);
 	});
 });
 
@@ -29,9 +28,9 @@ router.post('/login', celebrate({
 	})
 }), errors(), (request, response) => {
 	authController.login(request.body).then((result) => {
-		response.status(result.status).json(result);
+		response.status(200).json(result);
 	}, err => {
-		response.status(err.status).json(err);
+		response.status(500).json(err);
 	});
 });
 

@@ -7,7 +7,7 @@ const UrlSchema = new Schema({
 		type: String,
 		set: (val) => val.trim()
 	},
-	key: {
+	uniqueKey: {
 		type: String,
 		default: shortid.generate()
 	},

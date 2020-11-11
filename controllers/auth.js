@@ -6,7 +6,8 @@ const jwt = require('../utils/jwt');
 authController.createUser = async (newUser) => {
 	try {
 		const user = await (await User.createUser(newUser)).toJSON();
-		return { status: 200, user };
+		const token = jwt.generateJWT({ userId: user._id });
+		return { user, token };
 	} catch (err) {
 		console.log(err);
 	}
@@ -14,22 +15,14 @@ authController.createUser = async (newUser) => {
 
 authController.login = async ({ email, password }) => {
 	const user = await User.getUser(email);
-	// .then(async (user) => {
 	if (user) {
 		const isAuth = await bcrypt.compare(password, user.password);
 		if (isAuth) {
-			const { token, err } = jwt.generateJWT({ userId: user.userId, email });
-			if (err) {
-				return { type: 'error', message: 'token issue', ...err };
-			}
-			return { status: 200, token };
-		} else {
-			return { type: 'warning', message: 'invalid credentials' };
-		}
-	} else {
-		// no user found
-		return { status: 'warning', message: 'user not found' };
-	}
+			const { token, err } = jwt.generateJWT({ userId: user._id });
+			if (err) return { type: 'error', message: 'token issue', ...err };
+			return { token, user };
+		} else return { type: 'warning', message: 'invalid credentials' };
+	} else return { status: 'warning', message: 'user not found' };
 };
 
 module.exports = authController;

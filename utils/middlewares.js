@@ -7,7 +7,7 @@ exports.checkToken = (request, response, next) => {
 		if (token.startsWith('Bearer ')) token = token.slice(7, token.length);
 		const { payload, err } = jwt.validateJWT(token);
 		if (payload) {
-			User.getUser(payload.email).then((user) => {
+			User.getUserById(payload.userId).then((user) => {
 				request.user = user;
 				next();
 			});
