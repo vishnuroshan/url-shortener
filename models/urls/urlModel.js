@@ -1,4 +1,3 @@
-const shortid = require('shortid');
 const mongoose = require('../../db/connection');
 const Schema = mongoose.Schema;
 
@@ -9,7 +8,8 @@ const UrlSchema = new Schema({
 	},
 	uniqueKey: {
 		type: String,
-		default: shortid.generate()
+		unique: true,
+		required: true
 	},
 	clicks: {
 		type: Number,

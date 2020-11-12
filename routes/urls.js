@@ -3,6 +3,7 @@ const urlController = require('../controllers/urls');
 const { celebrate, errors, Joi } = require('celebrate');
 const { BASE_URL } = require('../config/app-config');
 const validUrl = require('valid-url');
+const shortid = require('shortid');
 const checkToken = require('../utils/middlewares').checkToken;
 router.get('/', (request, response) => {
 	response.status(200).send('hi welcome to linkBro. A simple url shortener service');
@@ -40,7 +41,10 @@ router.post('/shorten', checkToken, celebrate({
 	if (request.user && request.user._id) {
 		request.body.userId = request.user._id;
 	}
-	urlController.createUrl(request.body).then(urlObj => {
+	urlController.createUrl({
+		...request.body,
+		uniqueKey: shortid.generate()
+	}).then(urlObj => {
 		let shortUrl = `${BASE_URL}/${urlObj.uniqueKey}`;
 		if (!shortUrl.startsWith('http://', 0)) shortUrl = `http://${shortUrl}`;
 		response.status(200).json({ shortUrl, isAuth: request.user ? true : false });
