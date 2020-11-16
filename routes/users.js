@@ -11,7 +11,7 @@ router.get('/listUrls', celebrate({
 }), errors(), (request, response) => {
 	console.log('user data;>', request.user);
 	urlController.getUrlsForUser({ userId: request.user._id }, request.query.offset, request.query.limit).then((result) => {
-		response.status(200).json({ ...result, status: 200 });
+		response.status(200).json({ ...result, user: request.user, status: 200 });
 	}, err => {
 		console.log(err);
 		response.status(500).json(err);

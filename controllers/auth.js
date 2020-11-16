@@ -6,7 +6,7 @@ const jwt = require('../utils/jwt');
 authController.createUser = async (newUser) => {
 	try {
 		const user = await (await User.createUser(newUser)).toJSON();
-		const token = jwt.generateJWT({ userId: user._id });
+		const { token } = jwt.generateJWT({ userId: user._id });
 		return { user, token };
 	} catch (err) {
 		console.log(err);
